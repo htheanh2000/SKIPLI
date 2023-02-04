@@ -1,0 +1,27 @@
+@import '../../style/style.scss';
+
+.button {
+    all: unset;
+    border-radius: 0.25rem /* 4px */;
+    cursor: pointer;
+    &:focus {
+        outline: 1px solid $black-color;
+    }
+    // type 
+    &--primary {
+        background-color: $primary-color;
+        color: $white-color;
+    }
+    &--secondary {
+        background-color: $primary-color;
+        color: $white-color;
+    }
+
+    // size
+    &--md {
+        padding: 0.5rem 1.5rem /* 8px 24px */;
+    }
+    &--lg {
+        padding: 1rem 2.5rem /* 16px 40px */;
+    }
+}
