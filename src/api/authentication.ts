@@ -1,6 +1,6 @@
 import api from "./axios";
 
-async function refreshToken() {
+const refreshToken = async () => {
     const value = Number(localStorage.getItem('expired'));
     if (value && new Date(value) < new Date()) {
       const result = await api.get('/refresh');
@@ -11,4 +11,16 @@ async function refreshToken() {
       );
     }
   }
-  
+
+
+export type CreateNewAccessCodeProps = string
+
+const CreateNewAccessCode = async (phonenumber: CreateNewAccessCodeProps) => {
+    const params = {
+      user: phonenumber
+    }
+    const result = await api.post('/createNewAccessCode', params);
+    return result
+}
+
+export {CreateNewAccessCode}
