@@ -19,7 +19,9 @@ const CreateNewAccessCode = async (phonenumber: CreateNewAccessCodeProps) => {
     const params = {
       user: phonenumber
     }
-    const result = await api.post('/createNewAccessCode', params);
+    console.log(params);
+    
+    const result =  await api.post('/createNewAccessCode', params);
     return result
 }
 

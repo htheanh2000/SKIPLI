@@ -7,11 +7,18 @@ type Props = {
   name?: string
 }
 
+export type InputRef =  {
+    getValue: () => string
+}
+
 const Input = forwardRef((props: Props, ref) => {
   const { placeholder, className, name } = props
   const inputRef = useRef<HTMLInputElement>(null)
   useImperativeHandle(ref, () => ({
-    value: inputRef?.current?.value,
+    getValue: () => {
+      return inputRef.current?.value
+    }
+
   }))
 
   return (

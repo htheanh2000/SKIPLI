@@ -1,15 +1,14 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import {CreateNewAccessCode, CreateNewAccessCodeProps} from '../api/authentication'
-
+import {REQUEST_CODE_SUCCEEDED, REQUEST_CODE_FAILED, REQUEST_CODE_PENDING} from './features/auth/authSlice';
 function* fetchUser(action: Action) {
    try {
-    console.log("Star Saga");
-    
-      const user:Promise<CreateNewAccessCodeProps>  = yield call(CreateNewAccessCode, action.payload);
-      yield put({type: "USER_CREATE_NEW_ACCESS_CODE_SUCCEEDED", user: user});
+      // START CALL API
+      yield put({type: REQUEST_CODE_PENDING});
+      yield call(CreateNewAccessCode, action.payload);
+      yield put({type: REQUEST_CODE_SUCCEEDED});
    } catch (e) {
-      yield put({type: "USER_CREATE_NEW_ACCESS_CODE_FAILED", message: e});
+      yield put({type: REQUEST_CODE_FAILED, message: e});
    }
 }
 

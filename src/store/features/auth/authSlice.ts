@@ -6,12 +6,16 @@ import type { RootState } from '../..'
 interface UserState {
   user: string,
   token: string,
+  loading: boolean,
+  err: unknown,
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
     user: '',
     token: '',
+    loading: false,
+    err: null
 }
 
 export const authSlice = createSlice({
@@ -20,13 +24,26 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    'USER_CREATE_NEW_ACCESS_CODE_SUCCEEDED': (state, action: PayloadAction<string>) => {
-      state.user = action.payload
+    'REQUEST_CODE_SUCCEEDED': (state) => {
+      console.log("REQUEST_CODE_SUCCEEDED")
+      state.loading = false
+      state.err = null
     },
+    'REQUEST_CODE_FAILED': (state, action: PayloadAction<unknown>) => {
+      console.log("REQUEST_CODE_FAILED");
+      
+      state.loading = false
+      state.err = action
+    },
+    'REQUEST_CODE_PENDING': (state) => {
+      console.log("REQUEST_CODE_PENDING");
+      state.loading = true
+      state.err = null
+    }
   },
 })
 
-export const { USER_CREATE_NEW_ACCESS_CODE_SUCCEEDED } = authSlice.actions
+export const { REQUEST_CODE_SUCCEEDED, REQUEST_CODE_FAILED, REQUEST_CODE_PENDING } = authSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectUser = (state: RootState) => state.counter.value
