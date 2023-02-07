@@ -1,12 +1,11 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import useDebounce from '../../hooks/useDebounce';
 import style from './style.module.scss';
-const [searchTerm, setSearchTerm] = useState<string>('') // value search user want
+
+const SearchBar = () => {
+  const [searchTerm, setSearchTerm] = useState<string>('') // value search user want
   const debouncedSearchTerm = useDebounce(searchTerm, 500) // debounce for 500ms
   const searchInputRef = useRef<HTMLInputElement>(null)
-const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };

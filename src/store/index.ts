@@ -1,4 +1,4 @@
-import { applyMiddleware, configureStore} from '@reduxjs/toolkit'
+import { applyMiddleware, combineReducers, configureStore} from '@reduxjs/toolkit'
 import counterSlice from './features/counter/counterSlice'
 import authSlice from './features/auth/authSlice'
 import createSagaMiddleware from 'redux-saga'
@@ -6,8 +6,17 @@ import mySaga from './sagas'
 import { createReduxHistoryContext } from "redux-first-history";
 import { createBrowserHistory } from "history";
 import verifySlice from './features/auth/verifySlice'
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 
 const sagaMiddleware = createSagaMiddleware()
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['user']
+};
+
 
 const {
   createReduxHistory,
@@ -15,14 +24,17 @@ const {
   routerReducer
 } = createReduxHistoryContext({ history: createBrowserHistory() });
 
+const reducers = combineReducers({
+  counter : counterSlice,
+  user: authSlice,
+  code: verifySlice,
+  router: routerReducer
+})
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
-  reducer: {
-    counter : counterSlice,
-    user: authSlice,
-    code: verifySlice,
-    router: routerReducer
-  },
+  reducer: persistedReducer,
   middleware: [sagaMiddleware, routerMiddleware]
 })
 

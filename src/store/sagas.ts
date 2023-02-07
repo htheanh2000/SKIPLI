@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import {CreateNewAccessCode, ValidateAccessCode} from '../api/authentication'
 import {CREATE_ACCESS_CODE_FULFILED, CREATE_ACCESS_CODE_FAILED, CREATE_ACCESS_CODE_PENDING} from './features/auth/authSlice';
 import {VERIFY_ACCESS_CODE_FULFILED, VERIFY_ACCESS_CODE_FAILED, VERIFY_ACCESS_CODE_PENDING} from './features/auth/verifySlice';
-import {router} from '../App'
+import {router} from '../router'
 
 function* createUser(action: Action) {
    try {
@@ -23,7 +23,7 @@ function* verifyUser(action: Action) {
       yield put({type: VERIFY_ACCESS_CODE_PENDING});
       yield call(ValidateAccessCode, action.payload);
       yield put({type: VERIFY_ACCESS_CODE_FULFILED});
-      // yield router.navigate('/');
+      yield router.navigate('/dashboard');
    } catch (e) {
       console.log("FAILURE", e);
       
