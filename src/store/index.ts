@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, configureStore} from '@reduxjs/toolkit'
 import counterSlice from './features/counter/counterSlice'
 import authSlice from './features/auth/authSlice'
+import githubSlice from './features/github/githubSlice'
 import createSagaMiddleware from 'redux-saga'
 import mySaga from './sagas'
 import { createReduxHistoryContext } from "redux-first-history";
@@ -28,7 +29,8 @@ const reducers = combineReducers({
   counter : counterSlice,
   user: authSlice,
   code: verifySlice,
-  router: routerReducer
+  github: githubSlice,
+  router: routerReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -13,6 +13,8 @@ const HomePage = () => {
         const value = inputRef.current?.getValue()
         dispatch({type: 'CREATE_ACCESS_CODE', payload: value})
     }
+
+
     return (
         <Page className={style.wrapper}>
             <h1>Verify your phone number</h1>
