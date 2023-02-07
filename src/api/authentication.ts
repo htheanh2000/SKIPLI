@@ -19,10 +19,13 @@ const CreateNewAccessCode = async (phonenumber: CreateNewAccessCodeProps) => {
     const params = {
       user: phonenumber
     }
-    console.log(params);
-    
-    const result =  await api.post('/createNewAccessCode', params);
+    const result =  await api.post('/CreateNewAccessCode', params);
     return result
 }
 
-export {CreateNewAccessCode}
+const ValidateAccessCode = async (params: unknown) => {
+  const result =  await api.post('/ValidateAccessCode', params);
+  return result
+}
+
+export {CreateNewAccessCode, ValidateAccessCode}

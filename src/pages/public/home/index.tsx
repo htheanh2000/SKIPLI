@@ -11,7 +11,7 @@ const HomePage = () => {
     const inputRef = useRef<InputRef>(null)
     const handleSubmit = () => {
         const value = inputRef.current?.getValue()
-        dispatch({type: 'USER_CREATE_NEW_ACCESS_CODE', payload: value})
+        dispatch({type: 'CREATE_ACCESS_CODE', payload: value})
     }
     return (
         <Page className={style.wrapper}>

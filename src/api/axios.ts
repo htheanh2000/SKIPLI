@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 
-const BASE_URL = 'http://localhost:3000/api/v1/'
+const BASE_URL = 'http://localhost:3000/auth'
 
 const api = axios.create({
   baseURL: BASE_URL,

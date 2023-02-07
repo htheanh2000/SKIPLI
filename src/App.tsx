@@ -7,16 +7,22 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import HomePage from './pages/public/home';
+import VerifyPage from './pages/public/verify';
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage/>,
   },
+  {
+    path: "/verify",
+    element: <VerifyPage/>,
+  },
 ]);
+
 function App() {
   return (
-    <RouterProvider router={router} />
+      <RouterProvider router={router}/>
   );
 }
 

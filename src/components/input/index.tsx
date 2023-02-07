@@ -1,10 +1,13 @@
-import { forwardRef, HTMLInputTypeAttribute, useImperativeHandle, useRef } from 'react'
+import { forwardRef, HTMLAttributes, useImperativeHandle, useRef } from 'react'
 import cn from "classnames"
 import style from './style.module.scss'
 type Props = {
   placeholder?: string
   className?: string
-  name?: string
+  name?: string,
+  type?: string;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export type InputRef =  {
@@ -12,13 +15,12 @@ export type InputRef =  {
 }
 
 const Input = forwardRef((props: Props, ref) => {
-  const { placeholder, className, name } = props
+  const { placeholder, className, name,type, ...rest } = props
   const inputRef = useRef<HTMLInputElement>(null)
   useImperativeHandle(ref, () => ({
     getValue: () => {
       return inputRef.current?.value
     }
-
   }))
 
   return (
@@ -31,8 +33,10 @@ const Input = forwardRef((props: Props, ref) => {
           id={name}
           name={name}
           ref={inputRef}
+          type={type}
           className={cn(style.input)}
           placeholder={placeholder}
+          {...rest}
         />
       </div>
     </div>
