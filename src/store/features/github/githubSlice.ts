@@ -31,7 +31,7 @@ interface User {
   subscriptions_url: string;
   type: string;
   url: string;
-  isLike: boolean;
+  isLiked: boolean;
 }
 
 interface SearchQuery { 
@@ -99,7 +99,7 @@ export const githubSlice = createSlice({
         if(action.payload.github_user_id != item.id) return item
         return {
           ...item,
-          isLike: !item.isLike
+          isLiked: !item.isLiked
         }
       })
     }
