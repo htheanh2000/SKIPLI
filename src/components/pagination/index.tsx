@@ -64,6 +64,7 @@ const Pagination = (props: Props) => {
         // Render our Page Pills
         return (
           <li
+             key={pageNumber}
             className={classnames('pagination-item', {
               selected: pageNumber === currentPage
             })}
@@ -75,6 +76,7 @@ const Pagination = (props: Props) => {
       })}
       {/*  Right Navigation arrow */}
       <li
+      
         className={classnames('pagination-item', {
           disabled: currentPage === lastPage
         })}

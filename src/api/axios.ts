@@ -1,19 +1,19 @@
 import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
-
-const BASE_URL = 'http://localhost:3000/auth'
+const BASE_URL = 'http://localhost:3000'
 
 const api = axios.create({
   baseURL: BASE_URL,
   timeout: 3000,
 })
 
-export type TConfig = AxiosRequestConfig<Object>
-
+export type TConfig = AxiosRequestConfig<Object>;
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    const token = window.localStorage.getItem('token');
-    if (!token) return config;
+    const {user: userState} = JSON.parse(window.localStorage.getItem('persist:root') || '');
+    if (!userState) return config;
+    const {user} = JSON.parse(userState) || ''
+    if(!user) return config;
     if (config?.headers) {
-        config.headers.Authorization = 'Bearer ' + token
+        config.headers.user = user
     }
     return config;
   });
@@ -37,7 +37,7 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       }
       if (
         error.response.status >= 500 &&
-        counter < Number(process.env.REACT_APP_RETRY)
+        counter < Number(process.env.REACT_APP_RETRY || 3)
       ) {
         counter++;
         return api.request(error.config);

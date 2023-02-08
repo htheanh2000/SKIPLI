@@ -31,6 +31,7 @@ interface User {
   subscriptions_url: string;
   type: string;
   url: string;
+  isLike: boolean;
 }
 
 interface SearchQuery { 
@@ -76,11 +77,39 @@ export const githubSlice = createSlice({
       state.loading = true
       state.err = null
       state.searchQuery = action.payload
+    },
+
+    //CHANGE_FAVORITE_GITHUB_USER
+    'CHANGE_FAVORITE_GITHUB_USER_FULFILED': (state: githubState, action: PayloadAction<any>) => {
+      console.log("CHANGE_FAVORITE_GITHUB_USER_FULFILED", action.payload)
+      state.loading = false
+      state.err = null
+    },
+    'CHANGE_FAVORITE_GITHUB_USER_FAILED': (state: githubState, action: PayloadAction<unknown>) => {
+      console.log("CHANGE_FAVORITE_GITHUB_USER_FAILED");
+      state.loading = false
+      state.err = action
+    },
+    'CHANGE_FAVORITE_GITHUB_USER_PENDING': (state: githubState, action: PayloadAction<{github_user_id: number}>) => {
+      console.log("CHANGE_FAVORITE_GITHUB_USER_PENDING", action.payload);
+      state.loading = true
+      state.err = null
+      console.log("state.data", state.data);
+      state.data = state.data.map(item => {
+        if(action.payload.github_user_id != item.id) return item
+        return {
+          ...item,
+          isLike: !item.isLike
+        }
+      })
     }
   },
 })
 
-export const { SEARCH_GITHUB_PENDING, SEARCH_GITHUB_FAILED, SEARCH_GITHUB_FULFILED } = githubSlice.actions
+export const {
+   SEARCH_GITHUB_PENDING, SEARCH_GITHUB_FAILED, SEARCH_GITHUB_FULFILED,
+  CHANGE_FAVORITE_GITHUB_USER_PENDING, CHANGE_FAVORITE_GITHUB_USER_FAILED, CHANGE_FAVORITE_GITHUB_USER_FULFILED 
+} = githubSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectUser = (state: RootState) => state.counter.value
