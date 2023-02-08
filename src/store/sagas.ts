@@ -36,7 +36,7 @@ function* verifyUser(action: Action) {
 function* fetchGithubUser(action: Action):  Generator<Effect, void, any> {
    try {
       // START CALL API
-      yield put({type: SEARCH_GITHUB_PENDING});
+      yield put({type: SEARCH_GITHUB_PENDING, payload: action.payload});
       const response = yield call(searchGithubUser, action.payload);
       
       yield put({type: SEARCH_GITHUB_FULFILED, payload: response.data});

@@ -4,14 +4,11 @@ import type { RootState } from '../..'
 
 // Define a type for the slice state
 interface githubState {
-  searchQuery: { // use for caching data.
-    q: string,
-    page: 1,
-    per_page: number
-  },
+  searchQuery: SearchQuery,
   data: User[],
   loading: boolean,
   err: unknown,
+  total_count: number
 }
 
 interface User {
@@ -36,16 +33,23 @@ interface User {
   url: string;
 }
 
+interface SearchQuery { 
+  q: string,
+  page: number,
+  per_page: number
+}
+
 // Define the initial state using that type
 const initialState: githubState = {
     searchQuery: { // use for caching data.
     q: '',
     page: 1,
-    per_page: 20
+    per_page: 5
   },
     data: [],
     loading: false,
-    err: null
+    err: null,
+    total_count: 0
 }
 
 
@@ -60,16 +64,18 @@ export const githubSlice = createSlice({
       state.loading = false
       state.err = null
       state.data = action.payload.items
+      state.total_count = action.payload.total_count
     },
     'SEARCH_GITHUB_FAILED': (state: githubState, action: PayloadAction<unknown>) => {
       console.log("SEARCH_GITHUB_FAILED");
       state.loading = false
       state.err = action
     },
-    'SEARCH_GITHUB_PENDING': (state: githubState) => {
+    'SEARCH_GITHUB_PENDING': (state: githubState, action: PayloadAction<SearchQuery>) => {
       console.log("SEARCH_GITHUB_PENDING");
       state.loading = true
       state.err = null
+      state.searchQuery = action.payload
     }
   },
 })
