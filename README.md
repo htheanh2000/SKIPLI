@@ -16,7 +16,7 @@ This is a Frontend project that provides an intuitive and visually appealing int
 - Acknowledgements
 
 ### Introduction
-Welcome to the Frontend Project! This project is a result of our effort to create a user-friendly interface that will make it easier for users to interact with our system.
+Welcome to the Frontend Project! This project is a result of our effort to create a user-friendly interface that will make it easier for users to search github user.
 
 ### Getting Started
 To get started, you'll need to clone this repository to your local machine, install the dependencies, and run the app.
@@ -24,11 +24,10 @@ To get started, you'll need to clone this repository to your local machine, inst
 ### Features
 Here's a list of features that our Frontend project provides:
 
-- Responsive design that works on different screen sizes
-- User-friendly interface
-- Intuitive navigation
-- Dynamic content
-- etc.
+- Sign up with phone number
+- Verify your phone number with acceseCode sent to your phone
+- Search github user
+- Like profile
 
 ### Prerequisites
 Before you start using the Frontend project, you'll need the following tools and dependencies:
@@ -59,3 +58,23 @@ The Frontend project is licensed under MIT license.
 
 ### Acknowledgements
 We'd like to thank everyone who has contributed to this project. Your contributions and feedback have been invaluable in helping us to make the Frontend project better.
+
+## Project Structure
+
+### Front End repository
+
+- src/api: define usage APIs
+- src/assets: contain all resourse like image,  icon,...
+- src/components: include custome component: button, icon, image, input, pagination, searchbar
+- src/hooks: custom hooks: useDebounce, usePagination
+- src/layouts: include layout for a page, we just have page component (no header and footer)
+- src/pages: include private page and publice page
+- src/router: define router by using react-router-dom 
+- src/stores: using redux-toolkit, redux-sagas and redux-persist to implement
+- src/style: define global style and config
+## Backend repository
+- models: define firebase databse
+- route: define our APIs
+
+## Screen shot
+https://drive.google.com/drive/folders/1WY088HAxCdQ051qCLy_eDJ9wNl1_a8hZ?usp=sharing
