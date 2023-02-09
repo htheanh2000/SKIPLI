@@ -1,0 +1,21 @@
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    table {
+        th, tr {
+            min-width: 200px;
+            text-align: center;
+        }
+        thead {
+            padding-bottom: 20px;
+        }
+        tr:nth-child(even) {
+            background-color: #D6EEEE;
+          }
+    }
+    pagination {
+        margin: 0 auto;
+        width: fit-content;
+        
+    }
+}

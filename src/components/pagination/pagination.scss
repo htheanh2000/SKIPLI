@@ -1,7 +1,9 @@
 .pagination-container {
     display: flex;
     list-style-type: none;
-  
+    margin: 0 auto;
+    margin-top: 32px;
+      width: fit-content;
     .pagination-item {
       padding: 0 12px;
       height: 32px;
