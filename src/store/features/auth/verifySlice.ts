@@ -20,18 +20,14 @@ export const authSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     'VERIFY_ACCESS_CODE_FULFILED': (state: VerifyState) => {
-      console.log("VERIFY_ACCESS_CODE_FULFILED")
       state.loading = false
       state.err = null
     },
     'VERIFY_ACCESS_CODE_FAILED': (state: VerifyState, action: PayloadAction<unknown>) => {
-      console.log("VERIFY_ACCESS_CODE_FAILED");
-      
       state.loading = false
       state.err = action
     },
     'VERIFY_ACCESS_CODE_PENDING': (state: VerifyState) => {
-      console.log("VERIFY_ACCESS_CODE_PENDING");
       state.loading = true
       state.err = null
     }

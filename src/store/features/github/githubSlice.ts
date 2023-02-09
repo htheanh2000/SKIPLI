@@ -61,19 +61,16 @@ export const githubSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     'SEARCH_GITHUB_FULFILED': (state: githubState, action: PayloadAction<any>) => {
-      console.log("SEARCH_GITHUB_FULFILED", action.payload)
       state.loading = false
       state.err = null
       state.data = action.payload.items
       state.total_count = action.payload.total_count
     },
     'SEARCH_GITHUB_FAILED': (state: githubState, action: PayloadAction<unknown>) => {
-      console.log("SEARCH_GITHUB_FAILED");
       state.loading = false
       state.err = action
     },
     'SEARCH_GITHUB_PENDING': (state: githubState, action: PayloadAction<SearchQuery>) => {
-      console.log("SEARCH_GITHUB_PENDING");
       state.loading = true
       state.err = null
       state.searchQuery = action.payload
@@ -81,20 +78,16 @@ export const githubSlice = createSlice({
 
     //CHANGE_FAVORITE_GITHUB_USER
     'CHANGE_FAVORITE_GITHUB_USER_FULFILED': (state: githubState, action: PayloadAction<any>) => {
-      console.log("CHANGE_FAVORITE_GITHUB_USER_FULFILED", action.payload)
       state.loading = false
       state.err = null
     },
     'CHANGE_FAVORITE_GITHUB_USER_FAILED': (state: githubState, action: PayloadAction<unknown>) => {
-      console.log("CHANGE_FAVORITE_GITHUB_USER_FAILED");
       state.loading = false
       state.err = action
     },
     'CHANGE_FAVORITE_GITHUB_USER_PENDING': (state: githubState, action: PayloadAction<{github_user_id: number}>) => {
-      console.log("CHANGE_FAVORITE_GITHUB_USER_PENDING", action.payload);
       state.loading = true
       state.err = null
-      console.log("state.data", state.data);
       state.data = state.data.map(item => {
         if(action.payload.github_user_id != item.id) return item
         return {
